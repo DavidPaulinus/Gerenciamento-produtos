@@ -38,5 +38,11 @@ public class ProdutoService {
 		
 		return _prod;
 	}
+
+	public String apagar(Long id) {
+		repo.deleteById(id);
+		
+		return "Produto removido com sucesso";
+	}
 	
 }

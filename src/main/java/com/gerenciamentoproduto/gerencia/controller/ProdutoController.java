@@ -3,6 +3,7 @@ package com.gerenciamentoproduto.gerencia.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,5 +50,13 @@ public class ProdutoController {
 		var _prod = serv.editar(id, dto);
 		
 		return ResponseEntity.ok(new DetalharProdutoDTO(_prod));
+	}
+	
+	@DeleteMapping("/apagar/{id}")
+	@Transactional
+	public ResponseEntity<String> apagar(@PathVariable Long id){
+		var _prod = serv.apagar(id);
+		
+		return ResponseEntity.ok(_prod);
 	}
 }
