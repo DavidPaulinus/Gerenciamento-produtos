@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,9 +25,16 @@ public class Produto {
 	private Integer quantidade;
 	private String tamanho;
 
-	public Produto(ProdutoDTO dto) {
+	public Produto(@Valid ProdutoDTO dto) {
 		this.nome = dto.nome();
 		this.quantidade = dto.quantidade();
 		this.tamanho = dto.tamanho();
+	}
+
+	public void atualizar(@Valid ProdutoDTO dto) {
+		this.nome = dto.nome();
+		this.quantidade = dto.quantidade();
+		this.tamanho = dto.tamanho();
+
 	}
 }

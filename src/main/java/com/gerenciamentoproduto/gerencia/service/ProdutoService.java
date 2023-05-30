@@ -9,6 +9,8 @@ import com.gerenciamentoproduto.gerencia.model.Produto;
 import com.gerenciamentoproduto.gerencia.model.dto.ProdutoDTO;
 import com.gerenciamentoproduto.gerencia.service.util.repository.ProdutoRepository;
 
+import jakarta.validation.Valid;
+
 @Service
 public class ProdutoService {
 	@Autowired
@@ -27,6 +29,14 @@ public class ProdutoService {
 
 	public Produto detalharPorId(Long id) {
 		return repo.findById(id).orElseThrow(() -> new RuntimeException("Id invalido"));
+	}
+
+	public Produto editar(Long id, @Valid ProdutoDTO dto) {
+		
+		var _prod = detalharPorId(id);
+		_prod.atualizar(dto);
+		
+		return _prod;
 	}
 	
 }
