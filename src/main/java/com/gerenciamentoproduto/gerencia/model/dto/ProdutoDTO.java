@@ -9,6 +9,8 @@ public record ProdutoDTO(
 		@NotNull
 		Integer quantidade, 
 		@NotBlank
-		String tamanho) {
+		String tamanho,
+		@NotBlank
+		String senha) {
 
 }

@@ -18,6 +18,9 @@ public class ProdutoService {
 
 	public Produto cadastrar(ProdutoDTO dto) {
 		var _prod = new Produto(dto);
+		
+		if(checaNomeIgual(dto)) throw new RuntimeException("Produto com o mesmo nome existe");
+			
 		repo.save(_prod);
 		
 		return _prod;
@@ -34,6 +37,7 @@ public class ProdutoService {
 	public Produto editar(Long id, @Valid ProdutoDTO dto) {
 		
 		var _prod = detalharPorId(id);
+		if(checaNomeIgual(dto)) throw new RuntimeException("Produto com o mesmo nome existe");
 		_prod.atualizar(dto);
 		
 		return _prod;
@@ -45,4 +49,13 @@ public class ProdutoService {
 		return "Produto removido com sucesso";
 	}
 	
+	private Boolean checaNomeIgual(ProdutoDTO dto) {
+		for(Produto list: listar()){
+			if(list.getNome().equalsIgnoreCase(dto.nome())) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }
